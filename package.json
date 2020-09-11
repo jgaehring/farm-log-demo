@@ -1,0 +1,18 @@
+{
+  "name": "farm-log-demo",
+  "version": "0.1.0",
+  "description": "demo of farmLog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "farmOS"
+  ],
+  "author": "Jamie Gaehring",
+  "license": "MIT",
+  "dependencies": {
+    "farmos": "^0.1.3",
+    "ramda": "^0.27.1"
+  }
+}
