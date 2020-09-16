@@ -20,7 +20,7 @@ connection.authorize('admin', 'admin')
   .then(() => connection.log.send(formatLogForServer(localLog)))
   .then(response => {
     // Before the timeout fires, go make a change to the log on the server.
-    console.log(`Update the log server-side at http://localhost/log/${response.id}`);
+    console.log(`Update the log server-side at ${response.uri}`);
 
     // Meanwhile this will change the log client-side.
     localLog.name = 'Update from the client!';
@@ -31,10 +31,14 @@ connection.authorize('admin', 'admin')
     })
   })
   .then(serverLog => {
+    // Merge the response into our local copy of the log.
     mergeLogFromServer(localLog, serverLog);
+    // Read out the conflicts created by the merge.
     const conflicts = getConflicts(localLog);
     console.log('Conflicts on the name prop: ', conflicts.name);
+    // Resolve the conflict by selecting the server version of the name.
     resolveConflict(localLog, 'name', conflicts.name[0].data);
-    print('Resolved name: ', localLog.name);
+    // Show that the name conflict has been resolved.
+    console.log('Resolved name: ', localLog.name);
   })
   .catch(console.error);
