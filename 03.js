@@ -33,6 +33,8 @@ connection.authorize('admin', 'admin')
   .then(serverLog => {
     // Merge the response into our local copy of the log.
     mergeLogFromServer(localLog, serverLog);
+    // Merging strategy favors the local copy.
+    console.log('Local name after merge: ', localLog.name) // 'Update from client'
     // Read out the conflicts created by the merge.
     const conflicts = getConflicts(localLog);
     console.log('Conflicts on the name prop: ', conflicts.name);
